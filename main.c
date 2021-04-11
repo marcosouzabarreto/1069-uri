@@ -4,7 +4,7 @@
 
 int conta_diamante(tp_pilha pilha, int tamanho, const char *expressao){
     char caractere, e;
-    int abre_diamante = 0, fecha_diamante = 0, diamantes=0, verificador = 0;
+    int abre_diamante = 0, fecha_diamante = 0, diamantes=0, verificador = -1;
 
     for(; tamanho>=0; tamanho--){
         caractere = expressao[tamanho];
