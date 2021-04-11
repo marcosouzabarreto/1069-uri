@@ -4,32 +4,33 @@
 
 int conta_diamante(tp_pilha pilha, int tamanho, const char *expressao){
     char caractere, e;
-    int diamante_direito = 0, diamante_esquerdo = 0, diamantes=0, verificador = 0;
+    int abre_diamante = 0, fecha_diamante = 0, diamantes=0, verificador = 0;
 
     for(; tamanho>=0; tamanho--){
         caractere = expressao[tamanho];
         if((caractere==60)||(caractere==62)){
             push(&pilha, caractere);
         }
-        while(!pilha_vazia(&pilha)){
-            pop(&pilha, &e);
-            if (e==62) {
-                diamante_direito++;
-                verificador++;
-            } else {
-                diamante_esquerdo++;
-                verificador--;
-                if(verificador<0) diamante_esquerdo--;
-            }
-        }
-        while((diamante_direito > 0) && (diamante_esquerdo > 0)){
 
-                diamante_direito--;
-                diamante_esquerdo--;
-                diamantes++;
+    }
+    while (!pilha_vazia(&pilha)){
+        pop(&pilha, &e);
 
+        if(e==60){
+            abre_diamante++;
+            verificador++;
+        } else if ((e==62)&&(verificador>=0)){
+            fecha_diamante++;
+            verificador--;
         }
     }
+    while((abre_diamante>0)&&(fecha_diamante>0)){
+        abre_diamante--;
+        fecha_diamante--;
+        diamantes++;
+    }
+
+    imprime_pilha(pilha);
     return diamantes;
 }
 int main() {
